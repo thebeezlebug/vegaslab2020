@@ -23,21 +23,9 @@ jobs:
     - name: Package with dotnet
       run: dotnet publish ./src/ghcorewebapp/ghcorewebapp.csproj --configuration Release --output ./output
       
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        # Artifact name
-        name: ghcorewebapp
-        # Directory containing files to upload
-        path: ./output
-    
-    - name: List Files
-      working-directory: ${{ github.workspace }}
-      run: ls -la
-      
+    # Create/Update Azure App Service Plan and App Service
     - name: Deploy
       uses: azure/login@v1
-      
       with:
         creds: ${{ secrets.AZURE_CREDS }}
         
@@ -45,7 +33,7 @@ jobs:
         az group create -n ${{ env.AZURE_GROUP_NAME }} -l westus 
         az group deployment create -n ghaction -g ${{ env.AZURE_GROUP_NAME }} --template-file ./src/infra/azureres.json --parameters webAppName=${{ env.AZURE_WEBAPP_NAME }}
 
-    # deploy web app using Azure credentials
+    # Deploy Web App
     - name: 'Azure webapp deploy'
       uses: azure/webapps-deploy@v1
       with:
