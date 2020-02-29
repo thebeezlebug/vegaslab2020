@@ -37,12 +37,13 @@ jobs:
       
     - name: Deploy
       uses: azure/login@v1
+      
       with:
         creds: ${{ secrets.AZURE_CREDS }}
         
     - run: |
         az group create -n ${{ env.AZURE_GROUP_NAME }} -l westus 
-        az group deployment create -n ghaction -g ${{ env.AZURE_GROUP_NAME }} --template-file ./.github/src/infra/azuredepoy.json
+        az group deployment create -n ghaction -g ${{ env.AZURE_GROUP_NAME }} --template-file ${{ github.workspace }}/src/infra/azuredepoy.json
 
       # Azure logout 
     - name: logout
