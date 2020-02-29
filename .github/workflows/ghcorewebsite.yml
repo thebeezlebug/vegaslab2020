@@ -45,7 +45,14 @@ jobs:
         az group create -n ${{ env.AZURE_GROUP_NAME }} -l westus 
         az group deployment create -n ghaction -g ${{ env.AZURE_GROUP_NAME }} --template-file ./src/infra/azureres.json --parameters webAppName=${{ env.AZURE_WEBAPP_NAME }}
 
-      # Azure logout 
+    # deploy web app using Azure credentials
+    - name: 'Azure webapp deploy'
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        package: './output' 
+
+    # Azure logout 
     - name: logout
       run: |
         az logout
