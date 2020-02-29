@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CRED }}
+          creds: ${{ secrets.AZURE_CREDS }}
 
       - run: |
           az group create -n ${{ env.AZURE_GROUP_NAME }} -l westus 
