@@ -15,9 +15,9 @@
             "name": "[parameters('webAppName')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2016-08-01",
-            "location": "[resourceGroup().location]"
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', 'frankdemoplan')]"
+                "[resourceId('Microsoft.Web/serverfarms', 'vsl2020las-plan')]"
             ],
             "properties": {
                 "name": "[parameters('webAppName')]",
