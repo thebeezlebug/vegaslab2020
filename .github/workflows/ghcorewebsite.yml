@@ -43,7 +43,7 @@ jobs:
         
     - run: |
         az group create -n ${{ env.AZURE_GROUP_NAME }} -l westus 
-        az group deployment create -n ghaction -g ${{ env.AZURE_GROUP_NAME }} --template-file ./infra/azuredepoy.json
+        az group deployment create -n ghaction -g ${{ env.AZURE_GROUP_NAME }} --template-file ./src/infra/azureres.json
 
       # Azure logout 
     - name: logout
