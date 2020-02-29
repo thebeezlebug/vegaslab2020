@@ -16,11 +16,11 @@ jobs:
     - name: Build with dotnet
       run: dotnet build ./src/ghcorewebapp/ghcorewebapp.csproj --configuration Release
     - name: Package with dotnet
-      run: dotnet publish ./src/ghcorewebapp/ghcorewebapp.csproj --configuration Release
+      run: dotnet publish ./src/ghcorewebapp/ghcorewebapp.csproj --configuration Release --output ./output
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
         name: ghcorewebapp
         # Directory containing files to upload
-        path: bin/Release/netcoreapp3.1/publish
+        path: ./output
